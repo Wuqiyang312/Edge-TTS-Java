@@ -1,0 +1,104 @@
+JFDML JFormDesigner: "8.1.0.0.283" Java: "17.0.6" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, comp tabbedPane1:::::x, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp tabbedPane1:::::x, space :::p}}"
+		} ) {
+			name: "this"
+			"title": "微软TTS"
+			"resizable": false
+			"modalExclusionType": enum java.awt.Dialog$ModalExclusionType APPLICATION_EXCLUDE
+			"defaultCloseOperation": 3
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane1"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp label1:::p::p, space :p:12:p, comp ShortName:::::x, space :p:18:p}, comp label4::l::480:x, comp Name::l:::x}}, seq {par l {comp label3::l:p::p, seq {space :::p, par l {par l:::p {comp textSave:::::x, seq {comp label5:::p::p, space s:::p, comp slider_speed:::p:400:p, space :::p, comp v_speed:::p::p}}, comp label8::l:p:468:p}}}, space :0:12:x}}"
+					"$verticalGroup": "par l {seq l {space :::p, par b {comp label1::b:p::p, comp ShortName::b:p::p}, space :p:27:p, comp label4:::p::p, space :::p, comp Name::::27:x, space u:::p, par b {comp label5::b:p::p, comp slider_speed::b:p::p, comp v_speed::b:p::p}, space :p:32:p, comp label8:::p::p, space :::p, comp textSave:::p::p, space :p:74:p, comp label3:::p::p}}"
+				} ) {
+					name: "panel1"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "语音人物选择:"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "作者:乌清远"
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "ShortName"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ShortName", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "Name"
+						"text": "语音人物"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "语音人物选择:"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label5"
+						"text": "速度:"
+					} )
+					add( new FormComponent( "javax.swing.JSlider" ) {
+						name: "slider_speed"
+						"maximum": 20
+						"value": 10
+						addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "slider_speedStateChanged", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "v_speed"
+						"text": "1.0"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label8"
+						"text": "默认保存:"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "textSave"
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "基础设置"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {space :::p, par l {comp scrollPane1::l::474:x, seq l {comp btn_save:::p::p, space :::p, comp btn_try:::p::p, space ::234:x, comp btn_run:::p::p}}, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp scrollPane1:::p:273:p, space :::p, par b {comp btn_save::b:p::p, comp btn_try::b:p::p, comp btn_run::b:p::p}, space ::10:x}}"
+				} ) {
+					name: "panel2"
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						add( new FormComponent( "javax.swing.JTextArea" ) {
+							name: "TTS_text"
+							addEvent( new FormEvent( "javax.swing.event.CaretListener", "caretUpdate", "TTS_textCaretUpdate", true ) )
+						} )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btn_try"
+						"text": "试听"
+						"enabled": false
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_try", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btn_save"
+						"text": "保存"
+						"enabled": false
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_save", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btn_run"
+						"text": "运行"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_run", true ) )
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "文字TTS"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 500, 400 )
+		} )
+	}
+}
