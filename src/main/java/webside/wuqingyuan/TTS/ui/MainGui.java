@@ -26,7 +26,6 @@ import javax.swing.GroupLayout;
  */
 public class MainGui extends JFrame {
     private static final OkHttpClient client = new OkHttpClient();
-    ArrayList<String> Locales = new ArrayList<>();
     ArrayList<String> ShortNames = new ArrayList<>();
     public MainGui() throws IOException {
         initComponents();

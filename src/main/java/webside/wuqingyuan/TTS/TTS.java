@@ -3,8 +3,11 @@ package webside.wuqingyuan.TTS;
 import okhttp3.*;
 import okio.ByteString;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.*;
 
 public class TTS implements Runnable{
@@ -42,7 +45,7 @@ public class TTS implements Runnable{
     static String ConvertToSsmlText(String lang, String voice, String text, String rate)
     {
         return "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='"
-                +lang+"'><voice name='"+voice+"'><prosody pitch='+0Hz' rate='"+rate+"'>"+text+"</prosody></voice></speak>";
+                +lang+"'><voice name='"+voice+"'><prosody pitch='+0Hz' rate='"+rate+"'>"+ text+"</prosody></voice></speak>";
     }
     //转换为ssml Web套接字字符串
     static String ConvertToSsmlWebSocketString(String requestId, String lang, String voice, String msg, String rate)
@@ -86,36 +89,6 @@ public class TTS implements Runnable{
                 webSocket.send(audioConfig);
                 webSocket.send(ssml);
             }
-
-//            final Pattern REQUEST_ID_PATTERN = Pattern.compile("X-RequestId:(?<requestId>.*?)\\r\\n");
-//
-//            @Override
-//            public void onMessage(WebSocket webSocket, ByteString bytes) {
-//                byte[] data = bytes.toByteArray();
-//                String text = new String(data);
-//                Matcher requestIdMatcher = REQUEST_ID_PATTERN.matcher(text);
-//
-//                if (requestIdMatcher.find()) {
-//                    String requestId = requestIdMatcher.group("requestId");
-//                    System.out.println(data[0] + " " + data[1] + " " + data[2]);
-//
-//                    if (!dataBuffers.containsKey(requestId)) {
-//                        dataBuffers.put(requestId, new ArrayList<>());
-//                    }
-//
-//                    if (data[0] == 0x00 && data[1] == 0x67 && data[2] == 0x58) {
-//                        // Last (empty) audio fragment. 空音频片段，代表音频发送结束
-//                        System.out.println("空音频片段-发送结束");
-//                        webSocket.close(1000, null);
-//                    } else {
-//                        int index = 142;
-//                        byte[] audioData = Arrays.copyOfRange(data, index, data.length);
-//                        dataBuffers.get(requestId).add(audioData);
-//                        System.out.println("接收数据包:" + Arrays.toString(audioData));
-//                    }
-//                }
-//            }
-
             @Override
             public void onMessage(WebSocket webSocket, ByteString bytes) {
                 byte[] data = bytes.toByteArray();
@@ -132,7 +105,21 @@ public class TTS implements Runnable{
                     if (data[0] == 0x00 && data[1] == 0x67 && data[2] == 0x58) {
                         // Last (empty) audio fragment. 空音频片段，代表音频发送结束
                         System.out.println("空音频片段-发送结束");
+                        // WebSocket关闭
                         webSocket.close(1000, null);
+                        List<byte[]> audioData = dataBuffers.get(sendRequestId);
+                        if (audioData != null) {
+                            System.out.println("接收到的音频字节长度：" + audioData.size());
+                            // 接收到的音频字节
+                            File f = new File("audio.webm");
+                            try (FileOutputStream fos = new FileOutputStream(f)) {
+                                for (byte[] audioByte : audioData) {
+                                    fos.write(audioByte);
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     } else {
                         int index = 142;
                         byte[] audioData = Arrays.copyOfRange(data, index, data.length);
@@ -151,21 +138,6 @@ public class TTS implements Runnable{
             @Override
             public void onClosed(WebSocket webSocket, int code, String reason) {
                 super.onClosed(webSocket, code, reason);
-                // WebSocket已关闭
-                System.out.println("code:" + code);
-
-                List<byte[]> audioData = dataBuffers.get(sendRequestId);
-                if (audioData != null) {
-                    System.out.println("接收到的音频字节长度：" + audioData.size());
-                    // 接收到的音频字节
-                    try (FileOutputStream fos = new FileOutputStream("audio.webm")) {
-                        for (byte[] audioByte : audioData) {
-                            fos.write(audioByte);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             }
 
             @Override
