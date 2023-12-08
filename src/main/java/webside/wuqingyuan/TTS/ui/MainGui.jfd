@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "8.1.0.0.283" Java: "17.0.6" encoding: "UTF-8"
+JFDML JFormDesigner: "8.1.1.0.298" Java: "17.0.6" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :::p, comp tabbedPane1:::::x, space :::p}}"
-			"$verticalGroup": "par l {seq l {space :::p, comp tabbedPane1:::::x, space :::p}}"
+			"$horizontalGroup": "par l {seq l {space :::p, comp tabbedPane1::::486:x, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp tabbedPane1::::357:x, space :::p}}"
 		} ) {
 			name: "this"
 			"title": "微软TTS"
@@ -15,8 +15,8 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "tabbedPane1"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp label1:::p::p, space :p:12:p, comp ShortName:::::x, space :p:18:p}, comp label4::l::480:x, comp Name::l:::x}}, seq {par l {comp label3::l:p::p, seq {space :::p, par l {par l:::p {comp textSave:::::x, seq {comp label5:::p::p, space s:::p, comp slider_speed:::p:400:p, space :::p, comp v_speed:::p::p}}, comp label8::l:p:468:p}}}, space :0:12:x}}"
-					"$verticalGroup": "par l {seq l {space :::p, par b {comp label1::b:p::p, comp ShortName::b:p::p}, space :p:27:p, comp label4:::p::p, space :::p, comp Name::::27:x, space u:::p, par b {comp label5::b:p::p, comp slider_speed::b:p::p, comp v_speed::b:p::p}, space :p:32:p, comp label8:::p::p, space :::p, comp textSave:::p::p, space :p:74:p, comp label3:::p::p}}"
+					"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp label1:::p::p, space :p:12:p, comp ShortName:::::x, space :p:18:p}, comp label4::l::480:x, comp Name::l:::x}}, seq {par l {comp label3::l:p::p, seq {space :::p, par l {par l:::p {comp textSave:::::x, seq {comp label5:::p::p, space s:::p, comp slider_speed:::p:400:p, space :::p, comp v_speed:::p::p}}, comp label8::l:p:468:p}}}, space :0:9:x}}"
+					"$verticalGroup": "par l {seq l {space :::p, par b {comp label1::b:p::p, comp ShortName::b:p::p}, space :p:27:p, comp label4:::p::p, space :::p, comp Name::::24:x, space u:::p, par b {comp label5::b:p::p, comp slider_speed::b:p::p, comp v_speed::b:p::p}, space :p:32:p, comp label8:::p::p, space :::p, comp textSave:::p::p, space :p:74:p, comp label3:::p::p}}"
 				} ) {
 					name: "panel1"
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -59,6 +59,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "textSave"
+						"enabled": false
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "基础设置"

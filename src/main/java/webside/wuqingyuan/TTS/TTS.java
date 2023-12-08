@@ -6,8 +6,8 @@ import okio.ByteString;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class TTS implements Runnable{
@@ -78,9 +78,10 @@ public class TTS implements Runnable{
         String sendRequestId = generateRequestId();
 
         String audioConfig = ConvertToAudioFormatWebSocketString(audioOutputFormat);
+        System.out.println("out: " + language+ voice+ msg+rate);
         String ssml = ConvertToSsmlWebSocketString(sendRequestId, language, voice, msg, rate);
 
-        WebSocket webSocket = client.newWebSocket(new Request.Builder().url(url).headers(headers).build(), new WebSocketListener() {
+        client.newWebSocket(new Request.Builder().url(url).headers(headers).build(), new WebSocketListener() {
             final Map<String, List<byte[]>> dataBuffers = new HashMap<>();
             @Override
             public void onOpen(WebSocket webSocket, Response response) {
@@ -111,11 +112,18 @@ public class TTS implements Runnable{
                         if (audioData != null) {
                             System.out.println("接收到的音频字节长度：" + audioData.size());
                             // 接收到的音频字节
-                            File f = new File("audio.webm");
-                            try (FileOutputStream fos = new FileOutputStream(f)) {
+                            Path f = new File("audio.webm").toPath(); // 无法创建使用默认
+                            try {
+                                f = Files.createTempFile(Constant.ttsOUTPrefix, Constant.ttsOUTSuffix); // 创建临时文件
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            try (FileOutputStream fos = new FileOutputStream(f.toFile())) {
                                 for (byte[] audioByte : audioData) {
                                     fos.write(audioByte);
                                 }
+                                Constant.ttsPath = f.toFile().getAbsolutePath();// 添加文件路径进入
+                                System.out.println("音频文件路径：" + Constant.ttsPath);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

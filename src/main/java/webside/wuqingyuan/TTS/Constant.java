@@ -5,6 +5,9 @@ import java.util.Calendar;
 
 public class Constant {
     public static String desktopPath = System.getProperty("user.home") + File.separator + "Desktop";
+    public static String ttsOUTPrefix = "audio_";
+    public static String ttsOUTSuffix = ".webm";
+    public static String ttsPath = "audio.webm";
 
     public static String getTime() {
         Calendar calendar = Calendar.getInstance();

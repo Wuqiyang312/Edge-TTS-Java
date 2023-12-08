@@ -172,6 +172,9 @@ public class MainGui extends JFrame {
                 //---- label8 ----
                 label8.setText("\u9ed8\u8ba4\u4fdd\u5b58:");
 
+                //---- textSave ----
+                textSave.setEnabled(false);
+
                 GroupLayout panel1Layout = new GroupLayout(panel1);
                 panel1.setLayout(panel1Layout);
                 panel1Layout.setHorizontalGroup(
@@ -201,7 +204,7 @@ public class MainGui extends JFrame {
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(v_speed)))
                                         .addComponent(label8, GroupLayout.PREFERRED_SIZE, 468, GroupLayout.PREFERRED_SIZE))))
-                            .addGap(0, 12, Short.MAX_VALUE))
+                            .addGap(0, 9, Short.MAX_VALUE))
                 );
                 panel1Layout.setVerticalGroup(
                     panel1Layout.createParallelGroup()
@@ -213,7 +216,7 @@ public class MainGui extends JFrame {
                             .addGap(27, 27, 27)
                             .addComponent(label4)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(Name, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                            .addComponent(Name, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(label5)
@@ -292,14 +295,14 @@ public class MainGui extends JFrame {
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(tabbedPane1)
+                    .addComponent(tabbedPane1, GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
                     .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(tabbedPane1)
+                    .addComponent(tabbedPane1, GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
                     .addContainerGap())
         );
         pack();
